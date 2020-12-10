@@ -4,12 +4,12 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class NstaircaseTest {
+public class ClimbStairsTest {
 
 	@Test
 	public void test_1() {
 		int n = 4;
-		int output = NStaircase.nStaircase(n);
+		int output = ClimbStairs.nStaircase(n);
 		int expectedOutput = 5;
 		
 		assertEquals(output, expectedOutput);

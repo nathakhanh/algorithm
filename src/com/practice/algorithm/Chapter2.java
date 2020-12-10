@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.Set;
 
 import com.practice.datastructure.LinkedListNode;
+import com.practice.datastructure.Result;
 
 public class Chapter2 {
 	/* Remove Dups: Write a code to remove duplicates from an unsorted linked list.
@@ -247,21 +248,45 @@ public class Chapter2 {
 	 * list, then they are intersecting
 	 */
 	public static LinkedListNode findInterSection(LinkedListNode n1, LinkedListNode n2) {
-		LinkedListNode reversedN1 = n1;
-		LinkedListNode reversedN2 = n2;
-		
 		//reverse the linkedlists
-		n1 = reversedLinkedList(n1);
-		n2 = reversedLinkedList(n2);
+		Result r1 = reversedLinkedList(n1);
+		Result r2 = reversedLinkedList(n2);
 		
-		//
+		//check if the last node is the same node, if not there is no intersection
+		if(r1.n != r2.n) {
+			return null;
+		}
 		
-		return null;
+		//Find long and short node
+		LinkedListNode longerNode = r1.length > r2.length ? n1 : n2;
+		LinkedListNode shorterNode = r1.length < r2.length ? n1 : n2;
+		int lengthDiff = Math.abs(r1.length - r2.length);
+		
+		//Discard the long node by (longerNode.length - shorterNode.length)
+		while(lengthDiff > 0) {
+			longerNode = longerNode.next;
+			lengthDiff--;
+		}
+		
+		//Move both node until they are the same
+		while (longerNode != shorterNode) {
+			longerNode = longerNode.next;
+			shorterNode = shorterNode.next;
+		}
+		
+		//Return longerNode or shorterNode, doesnt matter
+		return longerNode;
 	}
 	
-	public static LinkedListNode reversedLinkedList(LinkedListNode n) {
+	private static Result reversedLinkedList(LinkedListNode n) {
+		LinkedListNode current = n;
+		int length = 1;
+		while(current.next != null) {
+			length++;
+			current = current.next;
+		}
 		
-		return null;
+		return new Result(current, length);
 	}
 	
 	

@@ -47,6 +47,10 @@ public class LargestNonAdjacentSum {
 	//5,1,1,5
 	//5,5,10,100,10,5
 	public static int largestNonAdjacentSum_solution(int arr[]) { 
+		if (arr.length == 0) {
+            return 0;
+        }
+		
         int include = arr[0]; 
         int exclude = 0; 
         int excludeTemp; 
@@ -63,5 +67,21 @@ public class LargestNonAdjacentSum {
         /* return max of incl and excl */
         return ((include > exclude) ? include : exclude); 
     } 
+	
+	public static int largestNonAdjacentSum_solution2(int arr[]) { 
+		int a = arr[0];
+		int b = 0;
+		int temp;
+		
+		for(int i = 1; i < arr.length; i++) {
+			temp = a > b ? a : b;
+			a = b + arr[i];
+			b = temp;
+		}
+		
+		return a > b ? a : b;
+		
+	}
+	
 
 }
